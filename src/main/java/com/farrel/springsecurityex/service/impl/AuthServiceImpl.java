@@ -8,6 +8,7 @@ import com.farrel.springsecurityex.dto.RegisterRequest;
 import com.farrel.springsecurityex.dto.RegisterResponse;
 import com.farrel.springsecurityex.entity.UserAccount;
 import com.farrel.springsecurityex.service.AuthService;
+import com.farrel.springsecurityex.service.JwtService;
 import com.farrel.springsecurityex.service.UserAccountService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -23,6 +24,7 @@ public class AuthServiceImpl implements AuthService {
     private final PasswordEncoder passwordEncoder;
     private final AuthenticationManager authenticationManager;
     private final UserAccountService userAccountService;
+    private final JwtService jwtService;
     @Override
     public RegisterResponse register(RegisterRequest registerRequest) {
 
@@ -43,7 +45,7 @@ public class AuthServiceImpl implements AuthService {
 
         if (authentication.isAuthenticated()) {
             return LoginResponse.builder()
-                    .token("basdjhkasjkdasjkbdjkasbdjkasbdjkasbjkdbasjkdbasjkbdjka")
+                    .token(jwtService.generateToken(loginRequest.getUsername()))
                     .build();
         }
         throw new UsernameNotFoundException("Invalid username or password");
