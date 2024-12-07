@@ -2,7 +2,6 @@ package com.farrel.springsecurityex.controller;
 
 import com.farrel.springsecurityex.dto.StudentRequest;
 import com.farrel.springsecurityex.dto.StudentResponse;
-import com.farrel.springsecurityex.entity.Student;
 import com.farrel.springsecurityex.service.StudentService;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
